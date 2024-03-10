@@ -3,6 +3,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Dashboard from './pages/Dashboard';
 import Me from './pages/Me';
+import Coach from './pages/Coach';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/coach" element={<Coach />} />
           <Route path="/me" element={<Me />} />
           <Route path="*" element={<Navigate to="/me" replace />} />
         </Routes>
