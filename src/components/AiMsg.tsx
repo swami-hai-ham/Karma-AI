@@ -1,4 +1,5 @@
 import React from 'react';
+import TypeWriterEffect from 'react-typewriter-effect';
 
 const AiMsg: React.FC = () => {
   return (
@@ -12,7 +13,13 @@ const AiMsg: React.FC = () => {
         </div>
         <div className="bg-yellow-500 text-stone-900  flex items-center ml-3">
       <p className="break-words p-2 m-1 font-semibold">
-        Are Behen ke LUND kaam kar
+      <TypeWriterEffect
+            textStyle={{ fontFamily: 'Red Hat Display' }}
+            startDelay={20}
+            hideCursorAfterText="true"
+            text={"This is a single textThis is a single textThis is a single textThis is a single textThis is a single textThis is a single textThis is a single textThis is a single textThis is a single textThis is a single textThis is a single textThis is a single textThis is a single text"}
+            typeSpeed={8}
+          />
       </p>
     </div>
     </div>
