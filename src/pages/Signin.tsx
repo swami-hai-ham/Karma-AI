@@ -2,10 +2,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import Heading from '../components/Heading';
 import InputBox from '../components/InputBox';
 import { useState } from 'react';
+import InputVal from '../components/InputVal';
+import { emailS, passwordS } from '../zod/schema';
+
 const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [errComp, setErrComp] = useState("");
 
 
   return (
@@ -17,12 +21,25 @@ const Signin = () => {
         <InputBox label={'Email'} name={"Email"}  onChange={(e)=>{
           setEmail(e.target.value)
         }}/>
+        {errComp == "email" && <InputVal errorMessage='Input must be a valid email'/>}
         <InputBox label={'Password'} name={"Password"}  onChange={(e) => {
           setPassword(e.target.value)
         }}/>
+        {errComp == "password" && <InputVal errorMessage='Password must contain at least 6 characters'/>}
         <div className='flex justify-center m-3 '>
           <button className="bg-stone-600 rounded-lg focus:text-yellow-500 text-white hover:bg-stone-900 p-3 text-lg font-semibold" onClick={() => {
-            navigate('/dashboard')
+            const resulte = emailS.safeParse(email);
+            const resultp = passwordS.safeParse(password);
+            if(!resulte.success){
+              setErrComp('email')
+            }
+            if(!resultp.success){
+              setErrComp('password')
+            }
+
+            if(resulte.success && resultp.success){
+              navigate('/dashboard')
+            }
           }}>
             Sign in
           </button>

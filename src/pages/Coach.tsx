@@ -3,11 +3,14 @@ import NavBar from '../components/NavBar'
 import InputBox from '../components/InputBox'
 import Heading from '../components/Heading'
 import { useNavigate } from 'react-router-dom';
+import InputVal from '../components/InputVal';
+import { nameS, linkS } from '../zod/schema';
 
 const Coach = () => {
   const [aiName, setAiName] = useState('');
   const [imgLink, setImgLink] = useState('');
   const navigate = useNavigate();
+  const [errComp, setErrComp] = useState("");
 
   return (
     <div className='bg-stone-900 h-screen'>
@@ -18,12 +21,22 @@ const Coach = () => {
             <InputBox label='Coach Name' name='coach' onChange={(e) => {
               setAiName(e.target.value);
             }}/>
+            <div className='mr-28'>{errComp == "name" && <InputVal errorMessage='Name cannot be Empty!'/>}</div>
             <InputBox label='Image Link' name='link' onChange={(e) => {
               setImgLink(e.target.value);
             }}/>
+            <div className='mr-10'>{errComp == "link" && <InputVal errorMessage='Image link should be valid url'/>}</div>
             <div className='flex justify-center m-3 '>
           <button className=" rounded-lg focus:text-yellow-500 text-stone-900 hover:text-yellow-500 hover:bg-stone-900 focus:bg-stone-900 p-3 text-lg font-semibold" onClick={() => {
-            navigate('/dashboard')
+            if(!nameS.safeParse(aiName).success){
+              setErrComp('name')
+            }
+            if(!linkS.safeParse(imgLink).success){
+              setErrComp('link')
+            }
+            if(nameS.safeParse(aiName).success && linkS.safeParse(imgLink).success){
+              navigate('/dashboard')
+            }
           }}>
             Submit
           </button>

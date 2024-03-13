@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const Todo = () => {
   return (
@@ -33,7 +33,7 @@ const Todo = () => {
             </label>
             </div>
         </div>
-        <div className='flex-1 text-white font-mono m-3 font-semibold '>Kaam karo</div>
+        <div className='flex-1 text-white font-mono m-3 font-semibold overflow-hidden'>Kaam karo</div>
     </div>
   )
 }
