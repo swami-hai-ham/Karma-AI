@@ -1,8 +1,12 @@
+import React from 'react';
 
+interface InputBoxProps {
+    todo: string
+  }
 
-const Todo = () => {
+const Todo: React.FC<InputBoxProps> = ({ todo }) => {
   return (
-    <div className='p-3 bg-stone-700 rounded flex items-center'>
+    <div className='p-3 bg-stone-700 rounded m-2 flex items-center'>
         <div className="flex gap-4 w-max">
             <div className="inline-flex items-center">
             <label
@@ -33,7 +37,7 @@ const Todo = () => {
             </label>
             </div>
         </div>
-        <div className='flex-1 text-white font-mono m-3 font-semibold overflow-hidden'>Kaam karo</div>
+        <div className='flex-1 text-white font-mono m-3 font-semibold overflow-hidden'>{todo}</div>
     </div>
   )
 }
