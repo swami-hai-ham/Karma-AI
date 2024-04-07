@@ -5,13 +5,16 @@ import Heading from '../components/Heading'
 import { useNavigate } from 'react-router-dom';
 import InputVal from '../components/InputVal';
 import { nameS, linkS } from '../zod/schema';
+import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
+import { aiAtom } from '../store/state';
 
 const Coach = () => {
   const [aiName, setAiName] = useState('');
   const [imgLink, setImgLink] = useState('');
   const navigate = useNavigate();
   const [errComp, setErrComp] = useState("");
-
+  const setAi = useSetRecoilState(aiAtom)
   return (
     <div className='bg-stone-900 h-screen'>
       <NavBar />
@@ -35,6 +38,22 @@ const Coach = () => {
               setErrComp('link')
             }
             if(nameS.safeParse(aiName).success && linkS.safeParse(imgLink).success){
+              axios.post("https://karma-b.onrender.com/api/v1/ai/aiconfig", {
+                "aiName": aiName,
+                "imageUrl": imgLink
+              }, {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+              })
+              .then(response => {
+                setAi(response.data.ai);
+                console.log(response.data.ai);
+              })
+              .catch(error => {
+                console.log(error)
+              });
+              
               navigate('/dashboard')
             }
           }}>

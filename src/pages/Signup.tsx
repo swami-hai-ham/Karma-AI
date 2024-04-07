@@ -4,6 +4,7 @@ import InputBox from '../components/InputBox';
 import { useState } from 'react';
 import InputVal from '../components/InputVal';
 import { emailS, passwordS, nameS } from '../zod/schema';
+import axios from 'axios';
 
 const Signup = () => {
   const [fName, setFName] = useState('');
@@ -55,6 +56,19 @@ const Signup = () => {
             }
 
             if(resulte.success && resultp.success && resultFN.success && resultLN.success){
+              axios.post('https://karma-b.onrender.com/api/v1/user/signup', {
+                "email": resulte.data,
+                "firstName": resultFN.data,
+                "lastName": resultLN.data,
+                "password": resultp.data
+              }).then(response => {
+                console.log(response);
+                localStorage.setItem("token", response.data.token);
+                navigate('/coach');
+              }).catch(error => {
+                console.error(error);
+                
+              });
               navigate('/coach')
             }
           }}>

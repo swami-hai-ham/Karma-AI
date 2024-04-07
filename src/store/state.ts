@@ -20,3 +20,8 @@ export const aiMsgAtom = atom({
     key: 'aiMsg',
     default: []
 })
+
+export const hideSkeleton = atom({
+    key: 'hide',
+    default: true
+})

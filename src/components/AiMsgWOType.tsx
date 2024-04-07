@@ -1,11 +1,10 @@
 import React from 'react';
-import TypeWriterEffect from 'react-typewriter-effect';
 
-interface AiMsgProps {
+interface AiMsgWOTypeProps {
   msg: string;
 }
 
-const AiMsg: React.FC<AiMsgProps> = ({ msg }) => {
+const AiMsgWOType: React.FC<AiMsgWOTypeProps> = ({ msg }) => {
   return (
     <div className='bg-yellow-500 text-stone-900 m-3 pt-1 rounded'>
       <div className='flex items-center mt-2'>
@@ -16,16 +15,11 @@ const AiMsg: React.FC<AiMsgProps> = ({ msg }) => {
       </div>
       <div className="bg-yellow-500 text-stone-900 flex items-center ml-3">
         <p className="break-words p-2 m-1 font-semibold">
-          <TypeWriterEffect
-            startDelay={20}
-            hideCursorAfterText="true"
-            text={msg}
-            typeSpeed={12}
-          />
+          {msg}
         </p>
       </div>
     </div>
   );
 };
 
-export default AiMsg;
+export default AiMsgWOType;
