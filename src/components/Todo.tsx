@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import { aiMsgAtom, todoAtom } from '../store/state';
 import axios from 'axios';
 import { hideSkeleton } from '../store/state';
@@ -10,7 +10,7 @@ interface InputBoxProps {
 
 const Todo: React.FC<InputBoxProps> = ({ todo }) => {
   const [aiMsg, setAiMsg] = useRecoilState(aiMsgAtom);
-  const [hide, setHide] = useRecoilState(hideSkeleton);
+  const setHide = useSetRecoilState(hideSkeleton);
   const [todos, setTodos] = useRecoilState(todoAtom);
 
   return (

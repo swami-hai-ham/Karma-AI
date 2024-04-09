@@ -1,17 +1,17 @@
 import { useState, useRef } from "react";
 import InputVal from "./InputVal";
 import { todoS } from "../zod/schema";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
 import { todoAtom, userAtom, aiMsgAtom, hideSkeleton } from "../store/state";
 import axios from 'axios';
 
 const TodoAdd = () => {
   const [todos, setTodos] = useRecoilState(todoAtom)
-  const [user, setUser] = useRecoilState(userAtom)
+  const user = useRecoilValue(userAtom)
   const [todo, setTodo] = useState("");
   const [isErr, setIsErr] = useState(false);
   const [aiMsg, setAiMsg] = useRecoilState(aiMsgAtom);
-  const [hide, setHide] = useRecoilState(hideSkeleton);
+  const setHide = useSetRecoilState(hideSkeleton);
   const inputRef = useRef(null);
   return (
     <div className="m-2 p-3">

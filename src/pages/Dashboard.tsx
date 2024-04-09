@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import Todo from '../components/Todo'
 import AiNav from '../components/AiNav'
 import TodoAdd from '../components/TodoAdd'
-import { Skeleton, SkeletonCircle, SkeletonText, Box } from '@chakra-ui/react'
+import { SkeletonCircle, SkeletonText, Box } from '@chakra-ui/react'
 import {useRecoilValue} from 'recoil';
 import { hideSkeleton } from '../store/state'
 import AIMsgWOType from '../components/AiMsgWOType'
-import { useRecoilState } from 'recoil'
 import { userAtom, aiMsgAtom, todoAtom } from '../store/state'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const hide = useRecoilValue(hideSkeleton)
-  const[user, setUser] = useRecoilState(userAtom);
-  const[todos, setTodos] = useRecoilState(todoAtom);
-  const[aiMsgs, setAiMsgs] = useRecoilState(aiMsgAtom);
+  const user = useRecoilValue(userAtom);
+  const todos = useRecoilValue(todoAtom);
+  const aiMsgs = useRecoilValue(aiMsgAtom);
   const navigate = useNavigate()
   useEffect(() => {
     if (Object.keys(user).length === 0) {

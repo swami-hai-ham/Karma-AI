@@ -12,7 +12,7 @@ const AiMsgWOType: React.FC<AiMsgWOTypeProps> = ({ msg }) => {
     <div className='bg-yellow-500 text-stone-900 m-3 pt-1 rounded'>
       <div className='flex items-center mt-2'>
         <div className="w-10 h-10 overflow-hidden ml-5 mt-1">
-          <img className="w-full h-full object-cover rounded-full" src={ai.imageUrl} alt="Rounded avatar" />
+          <img className="w-full h-full object-cover rounded-full" src={String(ai.imageUrl)} alt="Rounded avatar" />
         </div>
         <div className='font-mono font-semibold text-lg ml-4 mt-1'>{ai.aiName}</div>
       </div>

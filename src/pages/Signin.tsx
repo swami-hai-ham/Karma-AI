@@ -48,7 +48,7 @@ const Signin = () => {
               }).then(response => {
                 console.log(response);
                 localStorage.setItem("token", response.data.token);
-                navigate('/coach');
+                navigate('/me');
               }).catch(error => {
                 console.error(error);
                 if(error.response.status == 401){

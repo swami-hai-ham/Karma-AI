@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import {useEffect} from 'react'
 import { Spinner } from '@chakra-ui/react'
 import axios from 'axios';
 import { useRecoilState } from 'recoil';

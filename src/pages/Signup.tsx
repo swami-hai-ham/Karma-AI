@@ -67,7 +67,7 @@ const Signup = () => {
                 "password": resultp.data
               }).then(response => {
                   localStorage.setItem("token", response.data.token);
-                  navigate('/coach');
+                  navigate('/me');
               }).catch(error => {
                 if(error.response.status == 400){
                   setErrComp('Etaken')
