@@ -15,7 +15,10 @@ const NavBar = () => {
           }}>Coach</button>
         </div>
         <div>
-        <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg px-5 py-2.5  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-mono font-bold">Logout</button>
+        <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg px-5 py-2.5  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 font-mono font-bold" onClick={() => {
+          localStorage.removeItem('token');
+          navigate('/me')
+        }}>Logout</button>
         </div>
         
       </div>

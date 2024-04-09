@@ -9,12 +9,14 @@ import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { aiAtom } from '../store/state';
 
+
 const Coach = () => {
   const [aiName, setAiName] = useState('');
   const [imgLink, setImgLink] = useState('');
   const navigate = useNavigate();
   const [errComp, setErrComp] = useState("");
   const setAi = useSetRecoilState(aiAtom)
+  const [loading, setLoading] = useState('0')
   return (
     <div className='bg-stone-900 h-screen'>
       <NavBar />
@@ -38,6 +40,7 @@ const Coach = () => {
               setErrComp('link')
             }
             if(nameS.safeParse(aiName).success && linkS.safeParse(imgLink).success){
+              setLoading("1")
               axios.post("https://karma-b.onrender.com/api/v1/ai/aiconfig", {
                 "aiName": aiName,
                 "imageUrl": imgLink
@@ -53,11 +56,12 @@ const Coach = () => {
               .catch(error => {
                 console.log(error)
               });
-              
-              navigate('/dashboard')
+              setTimeout(() => {
+                navigate('/me');
+              }, 2000);
             }
           }}>
-            Submit
+           {loading === "0" ? "Submit" : loading === "1" ? "Loading..." : null}
           </button>
         </div>
         </div>

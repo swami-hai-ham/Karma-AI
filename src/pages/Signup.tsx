@@ -11,6 +11,7 @@ const Signup = () => {
   const [lName, setLName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState('0')
   const navigate = useNavigate();
   const [errComp, setErrComp] = useState("");
 
@@ -42,6 +43,7 @@ const Signup = () => {
             const resultLN = nameS.safeParse(lName);
             const resulte = emailS.safeParse(email);
             const resultp = passwordS.safeParse(password);
+            
             if(!resultFN.success){
               setErrComp('fname')
             }
@@ -56,6 +58,7 @@ const Signup = () => {
             }
 
             if(resulte.success && resultp.success && resultFN.success && resultLN.success){
+              setLoading("1")
               axios.post('https://karma-b.onrender.com/api/v1/user/signup', {
                 "email": resulte.data,
                 "firstName": resultFN.data,
@@ -72,7 +75,7 @@ const Signup = () => {
               navigate('/coach')
             }
           }}>
-            Sign up
+            {loading === "0" ? "Sign up" : loading === "1" ? "Loading..." : null}
           </button>
         </div>
         <div className='flex justify-center mt-5 items-center'><div className='m-3'>Already have an account?</div><Link to='/signin' className='underline'>Signin</Link></div>
