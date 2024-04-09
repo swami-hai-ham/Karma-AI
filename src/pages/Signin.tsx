@@ -11,7 +11,7 @@ const Signin = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [errComp, setErrComp] = useState("");
-
+  const [loading, setLoading] = useState('0')
 
   return (
     <div className="flex justify-center items-center h-screen bg-stone-900 font-mono text-white">
@@ -23,10 +23,12 @@ const Signin = () => {
           setEmail(e.target.value)
         }}/>
         {errComp == "email" && <InputVal errorMessage='Input must be a valid email'/>}
+        {errComp == "AnotE" && <InputVal errorMessage='Account does not Exist'/>}
         <InputBox label={'Password'} name={"Password"}  onChange={(e) => {
           setPassword(e.target.value)
         }}/>
         {errComp == "password" && <InputVal errorMessage='Password must contain at least 6 characters'/>}
+        {errComp == "AnotE" && <InputVal errorMessage='Or Incorrect Password'/>}
         <div className='flex justify-center m-3 '>
           <button className="bg-stone-600 rounded-lg focus:text-yellow-500 text-white hover:bg-stone-900 p-3 text-lg font-semibold" onClick={() => {
             const resulte = emailS.safeParse(email);
@@ -39,6 +41,7 @@ const Signin = () => {
             }
 
             if(resulte.success && resultp.success){
+              setLoading("1")
               axios.post('https://karma-b.onrender.com/api/v1/user/signin', {
                 "email": resulte.data,
                 "password": resultp.data
@@ -48,15 +51,20 @@ const Signin = () => {
                 navigate('/coach');
               }).catch(error => {
                 console.error(error);
-                
+                if(error.response.status == 401){
+                  setErrComp('AnotE')
+                  setLoading("0")
+                }else{
+                  setErrComp('Internal')
+                  setLoading("0")
+                }
               });
-              
-              navigate('/dashboard')
             }
           }}>
-            Sign in
+            {loading === "0" ? "Sign in" : loading === "1" ? "Loading..." : null}
           </button>
         </div>
+        <div className='flex justify-center items-center'>{errComp == "Internal" && <InputVal errorMessage='Internal Server Error'/>}</div>
         <div className='flex justify-center mt-5 items-center'><div className='m-3'>Don't have an account?</div><Link to='/signup' className='underline'>Signup</Link></div>
       </div>
   </div>

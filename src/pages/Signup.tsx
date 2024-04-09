@@ -33,6 +33,7 @@ const Signup = () => {
           setEmail(e.target.value);
         }}/>
         {errComp == "email" && <InputVal errorMessage='Input must be a valid email'/>}
+        {errComp == "Etaken" && <InputVal errorMessage='Email already taken'/>}
         <InputBox label='Password' name='password' onChange={(e) => {
           setPassword(e.target.value);
         }}/>
@@ -65,19 +66,24 @@ const Signup = () => {
                 "lastName": resultLN.data,
                 "password": resultp.data
               }).then(response => {
-                console.log(response);
-                localStorage.setItem("token", response.data.token);
-                navigate('/coach');
+                  localStorage.setItem("token", response.data.token);
+                  navigate('/coach');
               }).catch(error => {
-                console.error(error);
-                
+                if(error.response.status == 400){
+                  setErrComp('Etaken')
+                  setLoading("0")
+                }else{
+                  setErrComp('Internal')
+                  setLoading("0")
+                }
               });
-              navigate('/coach')
             }
           }}>
             {loading === "0" ? "Sign up" : loading === "1" ? "Loading..." : null}
           </button>
+          
         </div>
+        <div className='flex justify-center items-center'>{errComp == "Internal" && <InputVal errorMessage='Internal Server Error'/>}</div>
         <div className='flex justify-center mt-5 items-center'><div className='m-3'>Already have an account?</div><Link to='/signin' className='underline'>Signin</Link></div>
       </div>
     </div>
