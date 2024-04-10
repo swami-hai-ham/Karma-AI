@@ -34,7 +34,7 @@ const Signup = () => {
         }}/>
         {errComp == "email" && <InputVal errorMessage='Input must be a valid email'/>}
         {errComp == "Etaken" && <InputVal errorMessage='Email already taken'/>}
-        <InputBox label='Password' name='password' onChange={(e) => {
+        <InputBox label='Password' name='password' type="password" onChange={(e) => {
           setPassword(e.target.value);
         }}/>
         {errComp == "password" && <InputVal errorMessage='Password must contain at least 6 characters'/>}

@@ -21,6 +21,7 @@
     "react-simple-typewriter": "^5.0.1",
     "react-typewriter-effect": "^1.1.0",
     "recoil": "^0.7.7",
+    "vercel": "^33.7.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

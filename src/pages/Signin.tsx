@@ -24,7 +24,7 @@ const Signin = () => {
         }}/>
         {errComp == "email" && <InputVal errorMessage='Input must be a valid email'/>}
         {errComp == "AnotE" && <InputVal errorMessage='Account does not Exist'/>}
-        <InputBox label={'Password'} name={"Password"}  onChange={(e) => {
+        <InputBox label={'Password'} name={"Password"} type="password" onChange={(e) => {
           setPassword(e.target.value)
         }}/>
         {errComp == "password" && <InputVal errorMessage='Password must contain at least 6 characters'/>}
