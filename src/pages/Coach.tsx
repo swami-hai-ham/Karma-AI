@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import InputBox from '../components/InputBox'
 import Heading from '../components/Heading'
@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import InputVal from '../components/InputVal';
 import { nameS, linkS } from '../zod/schema';
 import axios from 'axios';
-import { useSetRecoilState } from 'recoil';
-import { aiAtom } from '../store/state';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { aiAtom, userAtom } from '../store/state';
 
 
 const Coach = () => {
@@ -17,6 +17,12 @@ const Coach = () => {
   const [errComp, setErrComp] = useState("");
   const setAi = useSetRecoilState(aiAtom)
   const [loading, setLoading] = useState('0')
+  const user = useRecoilValue(userAtom);
+  useEffect(() => {
+    if (Object.keys(user).length === 0) {
+      navigate('/me'); // Redirect to '/me' if user object is empty
+    }
+  })
   return (
     <div className='bg-stone-900 h-screen'>
       <NavBar />
